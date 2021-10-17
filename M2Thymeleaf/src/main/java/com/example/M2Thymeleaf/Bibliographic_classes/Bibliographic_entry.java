@@ -9,7 +9,7 @@ import java.util.List;
 @Entity
 public class Bibliographic_entry {
 
-    @OneToMany(fetch = FetchType.EAGER)
+    @OneToMany(fetch = FetchType.EAGER) //Resolves first to avoid access issues
     private List<Author> authorsList= new ArrayList<>();
 
     @Id

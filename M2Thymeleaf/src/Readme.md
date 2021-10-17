@@ -8,9 +8,11 @@ a force stop command is needed (input -99 in the menu).
 ***
 
 Pending Spring Injection !! Critical !!
+
 * Migrate to constructor based injection for the JPA repositories
 
-PENDING JPA implementation
+***
+* PENDING JPA implementation
 
 * Recover data (findBy...)
 * Check/Add relations @ManyToOne....
@@ -18,8 +20,8 @@ PENDING JPA implementation
 
 PENDING WEB/REST implementation
 
-* Add the @RESTController to the class
-* JSON CRUD
+* Ensure the local registries list updates when REST/MVC are used
+* Revert to String method to parse JSON in REST
 
 ***
 

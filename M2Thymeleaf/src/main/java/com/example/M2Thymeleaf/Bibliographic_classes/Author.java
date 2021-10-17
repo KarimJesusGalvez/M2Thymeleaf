@@ -18,9 +18,11 @@ public class Author {
     public Author(String author) {
 
         // TODO create proper atributes
+        setAuthor_id(null);
         setBirth_year("0000");
         setComplete_name(author);
     }
+
 
     public void setComplete_name(String complete_name) {
         this.complete_name = complete_name;

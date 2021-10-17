@@ -55,7 +55,7 @@ public class Main implements CommandLineRunner {
 
 		List<Author> sec_autors = new ArrayList<>();
 		Bibliographic_entry tempsave = new Bibliographic_entry(eug, sec_autors,null,"book","paperback",
-				"Spring 5","Spanish",",LAN,Java,Spring ","407pg","2018");
+				"Spring 5","Spanish","LAN;Java;Spring ","407pg","2018");
 		b_e_repo.save(tempsave);
 /*
 		Bibliographic_entry temp2 = new Bibliographic_entry("book");
