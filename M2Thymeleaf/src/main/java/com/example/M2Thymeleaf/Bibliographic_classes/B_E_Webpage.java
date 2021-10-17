@@ -34,15 +34,23 @@ public class B_E_Webpage extends Bibliographic_entry{
             System.out.println("No change made in webpage's attributes");
     }
     @Override
-    public String toString() {
-        return "B_E_Webpage{"  + super.toString() +
+    public String toStringcustom() {
+        return "B_E_Webpage{"  + super.toStringcustom() +
                 "; URL='" + URL + '\'' +
                 "; date_of_retrival='" + date_of_retrieval + '\'' +
                 "} ";
     }
 
+    @Override
+    public String toString() {
+        return "B_E_Webpage{" +
+                "URL='" + URL + '\'' +
+                ", date_of_retrieval='" + date_of_retrieval + '\'' +
+                "} " + super.toString();
+    }
+
     public void print_atrib() {
-        String atribs = toString();
+        String atribs = toStringcustom();
         String[] temp_array = atribs.split(";");
         for (int count = 0; count < temp_array.length;count++){
             System.out.println(temp_array[count]);

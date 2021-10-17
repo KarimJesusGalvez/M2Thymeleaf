@@ -28,7 +28,7 @@ public class B_E_Audiobook extends B_E_Book {
             System.out.println("No change made in audiobook's attributes");
     }
     public void print_atrib() {
-        String atribs = toString();
+        String atribs = toStringcustom();
         String[] temp_array = atribs.split(";");
         for (int count = 0; count < temp_array.length;count++){
             System.out.println(temp_array[count]);
@@ -36,9 +36,16 @@ public class B_E_Audiobook extends B_E_Book {
     }
 
     @Override
-    public String toString() {
-        return "B_E_Audiobook{" + super.toString() +
+    public String toStringcustom() {
+        return "B_E_Audiobook{" + super.toStringcustom() +
                 "; narrator='" + narrator + '\'' +
                 "} ";
+    }
+
+    @Override
+    public String toString() {
+        return "B_E_Audiobook{" +
+                "narrator='" + narrator + '\'' +
+                "} " + super.toString();
     }
 }

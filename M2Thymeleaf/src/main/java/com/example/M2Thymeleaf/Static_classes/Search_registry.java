@@ -29,7 +29,7 @@ public class Search_registry {
 
         if (registries.size() > 0) {
             for (Bibliographic_entry count : registries) {
-                searcharray.add(count.toString());
+                searcharray.add(count.toStringcustom());
             }
             for (int a = 0; a < searcharray.size(); a++) {
                 if (searcharray.get(a).toLowerCase().contains(search_target.toLowerCase())) {

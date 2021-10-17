@@ -161,7 +161,7 @@ public class ManageDB{
 
             // 2nd OPTION GET && SET // for each one Not comfortable at all!
 
-            String[] atrib_array = registries.get(changeindex).toString().split(";");
+            String[] atrib_array = registries.get(changeindex).toStringcustom().split(";");
             for (int count = 2; count < atrib_array.length; count++) {
                 // count is 2 to omit the name of the class and the type
                 System.out.println("Do you want to change" + atrib_array[count]);

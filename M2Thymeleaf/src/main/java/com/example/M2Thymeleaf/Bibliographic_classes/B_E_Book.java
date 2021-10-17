@@ -46,18 +46,27 @@ public class B_E_Book extends Bibliographic_entry {
     }
 
     public void print_atrib() {
-        String atribs = toString();
+        String atribs = toStringcustom();
         String[] temp_array = atribs.split(";");
         for (int count = 0; count < temp_array.length;count++){
             System.out.println(temp_array[count]);
         }
     }
     @Override
-    public String toString() {
-        return "B_E_book{" + super.toString() +
+    public String toStringcustom() {
+        return "B_E_book{" + super.toStringcustom() +
                 "; edition='" + edition + '\'' +
                 "; id_ISBN='" + id_ISBN + '\'' +
                 "; id_LC='" + id_LC + '\'' +
                 "} " ;
+    }
+
+    @Override
+    public String toString() {
+        return "B_E_Book{" +
+                "edition='" + edition + '\'' +
+                ", id_ISBN='" + id_ISBN + '\'' +
+                ", id_LC='" + id_LC + '\'' +
+                "} " + super.toString();
     }
 } // END of class

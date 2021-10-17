@@ -27,7 +27,7 @@ public class B_E_Movie extends Bibliographic_entry {
 
     }
     public void print_atrib() {
-        String atribs = toString();
+        String atribs = toStringcustom();
         String[] temp_array = atribs.split(";");
         for (int count = 0; count < temp_array.length;count++){
             System.out.println(temp_array[count]);
@@ -85,14 +85,25 @@ public class B_E_Movie extends Bibliographic_entry {
     }
 
     @Override
-    public String toString() {
-        return "B_E_Movie{" + super.toString() +
+    public String toStringcustom() {
+        return "B_E_Movie{" + super.toStringcustom() +
                 "; resolution='" + resolution + '\'' +
                 "; other_lang_audio=" + other_lang_audio +
                 "; other_lang_subtitles=" + other_lang_subtitles +
                 "; actors=" + actors.toString() +
                 "; id_PCA_number='" + id_PCA_number + '\'' +
                 "} ";
+    }
+
+    @Override
+    public String toString() {
+        return "B_E_Movie{" +
+                "resolution='" + resolution + '\'' +
+                ", other_lang_audio=" + other_lang_audio +
+                ", other_lang_subtitles=" + other_lang_subtitles +
+                ", actors=" + actors +
+                ", id_PCA_number='" + id_PCA_number + '\'' +
+                "} " + super.toString();
     }
 
     public void setatribs(String atrib, String type){

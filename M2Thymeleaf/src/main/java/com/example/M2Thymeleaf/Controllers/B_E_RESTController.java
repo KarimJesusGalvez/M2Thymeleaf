@@ -26,7 +26,7 @@ import java.util.List;
  *Methods should always return a JSON object or a list of JSON objects
 */
 @RestController
-public class Menu_RESTController {
+public class B_E_RESTController {
 
     @Autowired
     General_imp construct;
@@ -37,19 +37,12 @@ public class Menu_RESTController {
     private B_E_Repo b_e_repo;
     private Author_Repo author_repo;
 
-    public Menu_RESTController(List<Bibliographic_entry> registries,B_E_Repo b_e_repo,Author_Repo author_repo) {
+    public B_E_RESTController(List<Bibliographic_entry> registries, B_E_Repo b_e_repo, Author_Repo author_repo) {
         System.out.println(" REST Controller created");
         this.registries = registries;
         this.b_e_repo = b_e_repo;
         this.author_repo = author_repo;
     }
-
-    // TODO Search by all
-    // TODO Delete @Body
-    // TODO del one
-    // TODO .count()
-
-
 
     @PostMapping("/rest/reg/add")
     public Bibliographic_entry create(@RequestBody Bibliographic_entry bibliographic_entry){
@@ -66,17 +59,25 @@ public class Menu_RESTController {
 
 
     @GetMapping("/rest/reg/all/string")
-    public String[] findAllstring(){
-        return b_e_repo.findAll().toString().split(";"); // To String en el HTML
+    public String[] findAllString(){
+        return b_e_repo.findAll().toString().split(","); // To String en el HTML
+    }
+    @GetMapping("/rest/reg/{type}/string")
+    public String[] findByTypeString(@PathVariable String type){
+        return b_e_repo.findByType(type).toString().split(","); // To String en el HTML
     }
     @GetMapping("/rest/reg/all")
-    public List<Bibliographic_entry> findAll(){
-        return b_e_repo.findAll(); // To String en el HTML
+    public String findAll(){
+
+        // TODO ERROR fix in JSON parsing
+        //return b_e_repo.findAll(); // To String en el HTML
+        return  "["+b_e_repo.findById(1L).get().toJSON()+"]";
     }
 
 
     @GetMapping("/rest/reg/{id}")
     public Bibliographic_entry get_ById(@PathVariable Long id){
+
         if (b_e_repo.getById(id).getTable_id() != null)
             return b_e_repo.getById(id);
         else
@@ -86,6 +87,8 @@ public class Menu_RESTController {
 
     @PostMapping("/rest/reg/id")
     public Bibliographic_entry post_ById(@RequestBody Long id){
+
+        // TODO check proper usage
         Bibliographic_entry temp =b_e_repo.getById(id);
         return temp;
     }
@@ -120,7 +123,6 @@ public class Menu_RESTController {
             error.printStackTrace();
         }
     }
-
     @PutMapping("/reg/update")
     public void update(@RequestBody Bibliographic_entry b_entry){
         // Deprecated
@@ -128,11 +130,10 @@ public class Menu_RESTController {
             b_e_repo.save(b_entry);
     }
 
-
     @DeleteMapping("/rest/reg/del/{id}")
     public void delete_ById(@PathVariable Long id){
         try {
-            Bibliographic_entry temp = b_e_repo.getById(id);
+            b_e_repo.getById(id);
             b_e_repo.deleteById(id);
         }catch(Exception error ){
             System.out.println("Id not found try again");
@@ -149,7 +150,7 @@ public class Menu_RESTController {
         }
     }
     @DeleteMapping("/rest/reg/del/all")
-    public void delete_Allconsole(){
+    public void delete_AllConsole(){
         if (managedb.delete_all())
             b_e_repo.deleteAll();
     }
@@ -162,28 +163,34 @@ public class Menu_RESTController {
              */
     }
     @GetMapping("/rest/reg/count")
-    public String countreg(){
-        Long count = b_e_repo.count();
+    public String countReg(){
+        long count = b_e_repo.count();
         return "The number of elements is " + count;
-        // TODO add count according to type
+        // TODO add count according provided param
     }
+    @GetMapping("/rest/reg/{type}/count")
+    public String counttype(@PathVariable String type){
+        int count =  b_e_repo.findByType(type).size();
+        return "The number of elements is " + count;
+
+    }
+
     @GetMapping("/rest/reg/evaluate/{id}/{value}")
-    public boolean evaluatereg(@PathVariable Long id,@PathVariable String value){
+    public boolean evaluateReg(@PathVariable Long id,@PathVariable String value){
         try {
-            if (b_e_repo.getById(id).toString().contains(value))
+            if (b_e_repo.getById(id).toStringcustom().toLowerCase().contains(value.toLowerCase()))
                 return true;
         }catch(Exception error) {
             error.printStackTrace();
 
         }
-        // TODO add count according to type
         return false;
     }
 
 
-    /**
-     * Fix errros in creation
-     */
+    // Test methods
+
+
     @GetMapping("/test/add")
     public void demoData(){
 
@@ -209,7 +216,7 @@ public class Menu_RESTController {
 
     }
     @GetMapping("/test/add/author")
-    public void demoauthorData(){
+    public void demoAuthorData(){
 
         List<Author> sec_autors = new ArrayList<>();
         sec_autors.add(new Author("Secondary example"));
@@ -223,12 +230,14 @@ public class Menu_RESTController {
     }
 
     @GetMapping("/test/author/string")
-    public String[] findauthorstring() {
-        return author_repo.findAll().toString().split(";"); // To String en el HTML
+    public String[] findAuthorString() {
+        return author_repo.findAll().toString().split(","); // To String en el HTML
     }
     @GetMapping("/test/author")
-    public String findauthor() {
-        return author_repo.findAll().toString();
+    public List<Author> findAuthor() {
+        // TODO  fix ERROR in JSON parsing
+        return author_repo.findAll();
     }
+
 } // END of Class
 

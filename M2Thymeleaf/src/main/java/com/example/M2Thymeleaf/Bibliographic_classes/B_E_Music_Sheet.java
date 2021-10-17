@@ -23,15 +23,23 @@ public class B_E_Music_Sheet extends B_E_Book{
         }
 
     @Override
-    public String toString() {
-        return "B_E_Music_Sheet{" + super.toString() +
+    public String toStringcustom() {
+        return "B_E_Music_Sheet{" + super.toStringcustom() +
                 "; movements='" + movements + '\'' +
                 "; instrumentation=" + instrumentation +
                 "} " ;
     }
 
+    @Override
+    public String toString() {
+        return "B_E_Music_Sheet{" +
+                "movements='" + movements + '\'' +
+                ", instrumentation=" + instrumentation +
+                "} " + super.toString();
+    }
+
     public void print_atrib() {
-        String atribs = toString();
+        String atribs = this.toStringcustom();
         String[] temp_array = atribs.split(";");
         for (int count = 0; count < temp_array.length;count++){
             System.out.println(temp_array[count]);

@@ -71,19 +71,33 @@ public class Bibliographic_entry {
     }
 
     public void print_atrib() {
-        String atribs = toString();
+        String atribs = toStringcustom();
         String[] temp_array = atribs.split(";");
         for (int count = 0; count < temp_array.length;count++){
             System.out.println(temp_array[count]);
         }
     }
 
+    @Override
+    public String toString() {
+        return "Bibliographic_entry{" +
+                "authorsList=" + authorsList +
+                ", table_id=" + table_id +
+                ", type='" + type + '\'' +
+                ", format='" + format + '\'' +
+                ", title='" + title + '\'' +
+                ", language='" + language + '\'' +
+                ", genre='" + genre + '\'' +
+                ", length='" + length + '\'' +
+                ", date_published='" + date_published + '\'' +
+                '}';
+    }
+
     /**
      * Overrides the print location in memory method
      * Use split(",") to print in lines
      */
-    @Override
-    public String toString() {
+    public String toStringcustom() {
         String a ="";
         String b = "Bibliographic_entry{" +
                 "; type='" + type + '\'' +
@@ -95,9 +109,23 @@ public class Bibliographic_entry {
                 "; date_published='" + date_published + '\'';
 
         for (int count = 0;count < this.authorsList.size();count++)
-            a.concat("; authors='" + this.authorsList.get(count).toString() + '\'');
+            a.concat("; authors='" + this.authorsList.get(count).toStringcustom() + '\'');
 
         return b.concat(a) + '}';
+
+    }
+    public String toJSON() {
+        return "{" +
+        "\"authorsList\"" +":\""+ authorsList +"\""+ ","+
+        "\"table_id\"" +":"+ table_id + ","+
+                "\"type\"" +":\""+ type   +"\""+ ","+
+                "\"format\"" +":\""+ format  +"\"" + ","+
+                "\"title\"" +":\""+ title   +"\""+ ","+
+                "\"language\"" +":\""+ language  +"\"" + ","+
+                "\"genre\"" +":\""+ genre  +"\""+ ","+
+                "\"length\"" +":\""+ length + "\""+ ","+
+                "\"date_published\"" +":\""+ date_published +"\""
+                +"}";
     }
 
     public void setType(String type) {

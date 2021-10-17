@@ -63,15 +63,23 @@ public class B_E_Recorded_Music extends Bibliographic_entry{
     }
 
     @Override
-    public String toString() {
-        return "B_E_Recorded_Music{"  + super.toString() +
+    public String toStringcustom() {
+        return "B_E_Recorded_Music{"  + super.toStringcustom() +
                 "; number_of_tracks='" + number_of_tracks + '\'' +
                 "; name_of_tracks='" + name_of_tracks + '\'' +
                 "} ";
     }
 
+    @Override
+    public String toString() {
+        return "B_E_Recorded_Music{" +
+                "number_of_tracks='" + number_of_tracks + '\'' +
+                ", name_of_tracks=" + name_of_tracks +
+                "} " + super.toString();
+    }
+
     public void print_atrib() {
-        String atribs = toString();
+        String atribs = toStringcustom();
         String[] temp_array = atribs.split(";");
         for (int count = 0; count < temp_array.length;count++){
             System.out.println(temp_array[count]);

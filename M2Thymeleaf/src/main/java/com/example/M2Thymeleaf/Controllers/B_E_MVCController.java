@@ -17,7 +17,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Controller
-public class Menu_MVCController {
+public class B_E_MVCController {
 
     @Autowired
     General_imp construct;
@@ -26,7 +26,7 @@ public class Menu_MVCController {
 
     private List<Bibliographic_entry> registries;
     private B_E_Repo b_e_repo;
-    public Menu_MVCController(List<Bibliographic_entry> registries, B_E_Repo b_e_repo){
+    public B_E_MVCController(List<Bibliographic_entry> registries, B_E_Repo b_e_repo){
         System.out.println("Has creado MVC Controller");
         this.registries = registries;
         this.b_e_repo = b_e_repo;

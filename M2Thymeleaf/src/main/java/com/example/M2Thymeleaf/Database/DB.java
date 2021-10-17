@@ -65,7 +65,7 @@ public class DB {
             while (filestring != null) { // till the end of the file
                 for (Bibliographic_entry count : registries) {
 
-                    String[] split_array = count.toString().split(";");
+                    String[] split_array = count.toStringcustom().split(";");
                     for (String check : split_array) {
                         if (check.contains(filestring)) // .isequalignorecase()
                            Boolean_array.add(true);
@@ -122,7 +122,7 @@ public class DB {
 
              */
             for (Bibliographic_entry count : registries){
-                String[] temp1 =count.toString().split(";");
+                String[] temp1 =count.toStringcustom().split(";");
                 int a = 0;
                 for ( a = 0; a < temp1.length;a++) {
 
