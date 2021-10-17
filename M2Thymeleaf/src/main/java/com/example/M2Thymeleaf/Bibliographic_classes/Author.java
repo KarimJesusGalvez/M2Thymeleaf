@@ -17,6 +17,7 @@ public class Author {
 
     public Author(String author) {
 
+        // TODO create proper atributes
         setBirth_year("0000");
         setComplete_name(author);
     }

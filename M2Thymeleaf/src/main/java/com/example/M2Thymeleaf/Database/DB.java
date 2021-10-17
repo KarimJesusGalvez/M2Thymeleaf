@@ -2,6 +2,9 @@ package com.example.M2Thymeleaf.Database;
 
 import com.example.M2Thymeleaf.Bibliographic_classes.Bibliographic_entry;
 import com.example.M2Thymeleaf.Implementations.General_imp;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+
 
 import javax.management.BadAttributeValueExpException;
 import java.io.*;
@@ -13,15 +16,25 @@ import java.util.List;
  * The central class, includes the main registry
  * and the console menu to access these
  */
-
+@Component
 public class DB {
 
+
+    @Autowired
+    public Menu query1;
 
     List<Bibliographic_entry> registries = new ArrayList<>();
     private String creation_date = LocalDateTime.now().toString();
 
-    public Menu query1 = new Menu(registries);
+    //public Menu query1 = new Menu(registries);
 
+
+    public DB(Menu query1) {
+        this.query1 = query1;
+    }
+
+    public DB() {
+    }
 
     /**
      * pass the virtual registries in menu to the DB

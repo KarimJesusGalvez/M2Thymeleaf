@@ -2,9 +2,10 @@ package com.example.M2Thymeleaf.Static_classes;
 
 import com.example.M2Thymeleaf.Bibliographic_classes.*;
 import com.example.M2Thymeleaf.Implementations.General_imp;
+import com.example.M2Thymeleaf.Repos.Author_Repo;
 import com.example.M2Thymeleaf.Repos.B_E_Repo;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
@@ -13,16 +14,22 @@ import java.util.List;
  * All methods are static, the class shouldn't be instantiated
  *
  */
-@Component
+@Service //Extends @Component
 public class ManageDB{
 
-    private B_E_Repo b_e_repo;
+    @Autowired
+    B_E_Repo b_e_repo;
+    @Autowired
+    Author_Repo author_repo;
+
 
     public ManageDB() {
     }
 
-    public ManageDB(B_E_Repo b_e_repo) {
+
+    public ManageDB(B_E_Repo b_e_repo, Author_Repo author_repo) {
         this.b_e_repo = b_e_repo;
+        this.author_repo = author_repo;
     }
 
     /**
@@ -33,6 +40,7 @@ public class ManageDB{
 
         // TODO almost 50 lines; break into smaller pieces
         // TODO maybe call(); ?
+
         General_imp construct = new General_imp();
         construct.printtype();
         String type_array = construct.input();
@@ -41,6 +49,8 @@ public class ManageDB{
                 || type_array.charAt(0) == '2'
                 || type_array.toLowerCase().charAt(0) == 'b'){
             Bibliographic_entry newbook = new B_E_Book();
+            for (Author author: newbook.getSecondary_authorsList())
+            author_repo.save(author);
             b_e_repo.save(newbook);
             return newbook;
         }
@@ -48,6 +58,8 @@ public class ManageDB{
                 ||type_array.charAt(0) == '3'
                 || type_array.toLowerCase().charAt(0) == 'a'){
             Bibliographic_entry newaudiobook = new B_E_Audiobook();
+            for (Author author: newaudiobook.getSecondary_authorsList())
+                author_repo.save(author);
             b_e_repo.save(newaudiobook);
             return newaudiobook;
         }
@@ -56,18 +68,24 @@ public class ManageDB{
                 || type_array.charAt(0) == '4'
                 || type_array.toLowerCase().charAt(0) == 'm'){
             Bibliographic_entry newMovie = new B_E_Movie();
+            for (Author author: newMovie.getSecondary_authorsList())
+                author_repo.save(author);
             b_e_repo.save(newMovie);
             return newMovie;
         }
         else if (type_array.charAt(0) == '5' // Recorded music
                 || type_array.toLowerCase().charAt(0) == 'r'){
             Bibliographic_entry newrecordedaudio = new B_E_Recorded_Music ();
+            for (Author author: newrecordedaudio.getSecondary_authorsList())
+                author_repo.save(author);
             b_e_repo.save(newrecordedaudio);
             return newrecordedaudio;
         }
         else if (type_array.charAt(0) == '6' // Music sheet
                 || type_array.toLowerCase().charAt(0) == 'n'){
             Bibliographic_entry newmusicsheet = new B_E_Music_Sheet();
+            for (Author author: newmusicsheet.getSecondary_authorsList())
+                author_repo.save(author);
             b_e_repo.save(newmusicsheet);
             return newmusicsheet;
         }
@@ -75,6 +93,8 @@ public class ManageDB{
         else if (type_array.charAt(0) == '7' // Webpage
                 || type_array.toLowerCase().charAt(0) == 'w'){
             Bibliographic_entry newebpage = new B_E_Webpage();
+            for (Author author: newebpage.getSecondary_authorsList())
+                author_repo.save(author);
             b_e_repo.save(newebpage);
             return newebpage;
         }
@@ -90,7 +110,9 @@ public class ManageDB{
         }
         else if (type_array.charAt(0) == '1') {
             Bibliographic_entry emptyB_E = new Bibliographic_entry("Undefined");
-            //bibliographic_entry_repo.save(emptyB_E);
+            for (Author author: emptyB_E.getSecondary_authorsList())
+                author_repo.save(author);
+            b_e_repo.save(emptyB_E);
             return emptyB_E;
         }
         else {
@@ -102,6 +124,7 @@ public class ManageDB{
                 error.printStackTrace();
                 System.out.println("Adding an empty object");
                 Bibliographic_entry emptyB_E = new Bibliographic_entry("temp");
+                b_e_repo.save(emptyB_E);
                 return emptyB_E;
             }
         }
@@ -157,9 +180,7 @@ public class ManageDB{
 
                     break; // TODO Not final, ask if you want to change something else?
                 }
-                    // 2/alternative OPTION
-                    // TODO access a subclass method in the superclass??????
-                    //Bibliographicclasses.B_E_book temp =(Bibliographicclasses.B_E_book) registries.get(index);
+
             }
 
 
@@ -226,6 +247,7 @@ public class ManageDB{
                 }
 
                 Bibliographic_entry item_removed = registries.remove(deleteindex);
+                b_e_repo.deleteById(item_removed.getTable_id());
                 item_removed.print_atrib();
                 System.out.println(" deleted");
                 System.out.println(" ");
@@ -292,4 +314,5 @@ public class ManageDB{
             return false;
         }
 
+    public void print_repo() {System.out.println(b_e_repo.findAll());}
 } //END Class

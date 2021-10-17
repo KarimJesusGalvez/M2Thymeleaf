@@ -2,12 +2,14 @@ package com.example.M2Thymeleaf.Bibliographic_classes;
 
 import com.example.M2Thymeleaf.Implementations.General_imp;
 
+import javax.persistence.OneToMany;
 import java.util.ArrayList;
 import java.util.List;
 
 public class B_E_Music_Sheet extends B_E_Book{
 
     private String movements;
+    @OneToMany
     private List<String> instrumentation = new ArrayList<String>();
 
     public B_E_Music_Sheet() {
@@ -48,8 +50,7 @@ public class B_E_Music_Sheet extends B_E_Book{
 
     public void setInstrumentation(String instrument) {
 
-        General_imp construct_gen = new General_imp();
-        System.out.println(instrumentation);
+        System.out.println(this.instrumentation);
         General_imp gen_construct = new General_imp();
 
         String atrib = "instrument";

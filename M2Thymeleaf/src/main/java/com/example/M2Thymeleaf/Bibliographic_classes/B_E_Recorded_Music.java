@@ -2,14 +2,15 @@ package com.example.M2Thymeleaf.Bibliographic_classes;
 
 import com.example.M2Thymeleaf.Implementations.General_imp;
 
+import javax.persistence.OneToMany;
 import java.util.ArrayList;
 import java.util.List;
 
 public class B_E_Recorded_Music extends Bibliographic_entry{
 
-    String number_of_tracks;
-    List<String> name_of_tracks = new ArrayList<String>();
-
+    private String number_of_tracks;
+    @OneToMany
+    private List<String> name_of_tracks = new ArrayList<String>();
 
     public B_E_Recorded_Music() {
         super("Recorded music/audio");

@@ -6,9 +6,17 @@ import com.example.M2Thymeleaf.Implementations.General_imp;
 import java.util.ArrayList;
 import java.util.List;
 
-
+/**
+ * See  docs for the search method below
+ */
 public class Search_registry {
 
+    /**
+     * Search the Whole Database for a match with the search term provided
+     * Creates a list with all the index of the objects that match
+     * @param registries The Database
+     * @return the list with the index of the matches found
+     */
     public static List<Integer> search (List<Bibliographic_entry> registries){
 
         System.out.println("Introduce the search term");

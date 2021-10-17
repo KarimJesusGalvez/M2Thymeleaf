@@ -7,9 +7,12 @@ to a specified location in the computer's local storage
 a force stop command is needed (input -99 in the menu).
 ***
 
+Pending Spring Injection !! Critical !!
+* Migrate to constructor based injection for the JPA repositories
+
 PENDING JPA implementation
 
-* Recover data
+* Recover data (findBy...)
 * Check/Add relations @ManyToOne....
 ***
 

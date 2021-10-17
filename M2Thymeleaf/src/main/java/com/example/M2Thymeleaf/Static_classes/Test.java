@@ -1,6 +1,7 @@
 package com.example.M2Thymeleaf.Static_classes;
 
 import com.example.M2Thymeleaf.Bibliographic_classes.Author;
+import com.example.M2Thymeleaf.Bibliographic_classes.B_E_Movie;
 import com.example.M2Thymeleaf.Bibliographic_classes.Bibliographic_entry;
 import com.example.M2Thymeleaf.Repos.Author_Repo;
 import com.example.M2Thymeleaf.Repos.B_E_Repo;
@@ -14,13 +15,19 @@ import java.util.List;
 public class Test {
 
     @Autowired
-    B_E_Repo B_ERepository;
-    //public void B_E_RepoController(B_E_Repo repo) {this.B_ERepository = repo;}
+    B_E_Repo b_e_repo;
     @Autowired
     Author_Repo author_repo;
-    //public void AuthorController(Author_Repo repo) {this.author_repo = repo;}
 
-    public Test() {}
+    public Test(B_E_Repo B_ERepository, Author_Repo author_repo) {
+        this.author_repo = author_repo;
+        this.b_e_repo = B_ERepository;
+    }
+
+
+
+    public Test() {
+    }
 
     public static void main(String[] args) {
 
@@ -99,16 +106,25 @@ public class Test {
         List<Author> sec_autors = new ArrayList<>();
         Bibliographic_entry tempsave = new Bibliographic_entry(eug, sec_autors,null,"book","paperback",
                 "Spring 5","Spanish",",LAN,Java,Spring ","407pg","2018");
-        B_ERepository.save(tempsave);
 
+        b_e_repo.save(tempsave);
+
+        b_e_repo.findAll();
+        for (Bibliographic_entry count : b_e_repo.findAll()) {
+            //System.out.println(count.toString());
+            //count.print_atrib();
+            // TODO fix error in for iter
+        }
         Bibliographic_entry temp2 = new Bibliographic_entry("book");
         author_repo.save(temp2.getMain_author());
         for (Author count : temp2.getSecondary_authorsList())
             author_repo.save(count);
-        B_ERepository.save(temp2);
+        System.out.println("====");
+        System.out.println(sec_autors.toString());
+        System.out.println("====");
+        b_e_repo.save(temp2);
     }
 
-/*
 
     public Bibliographic_entry test_suite() {
 
@@ -141,5 +157,4 @@ public class Test {
 
     }
 
- */
 }

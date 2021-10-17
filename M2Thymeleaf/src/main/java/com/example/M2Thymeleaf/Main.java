@@ -20,9 +20,11 @@ public class Main implements CommandLineRunner {
 
 
 	@Autowired
-	B_E_Repo B_ERepository;
+	B_E_Repo b_e_repo;
 	@Autowired
 	Author_Repo author_repo;
+	@Autowired
+	DB database1;
 
 	public static void main(String[] args){
 		SpringApplication.run(Main.class, args);
@@ -38,7 +40,7 @@ public class Main implements CommandLineRunner {
 
 		Print_logo.print_logo();
 		System.out.println("\n");
-		DB database1 = new DB();
+		//DB database1 = new DB();
 		database1.query1.menuhtml();
 		System.out.print(database1.getCreation_date().substring(0,10));
 		System.out.println(" Welcome to the DataBase");
@@ -54,13 +56,13 @@ public class Main implements CommandLineRunner {
 		List<Author> sec_autors = new ArrayList<>();
 		Bibliographic_entry tempsave = new Bibliographic_entry(eug, sec_autors,null,"book","paperback",
 				"Spring 5","Spanish",",LAN,Java,Spring ","407pg","2018");
-		B_ERepository.save(tempsave);
+		b_e_repo.save(tempsave);
 /*
 		Bibliographic_entry temp2 = new Bibliographic_entry("book");
 		author_repo.save(temp2.getMain_author());
 		for (Author count : temp2.getSecondary_authorsList())
 			author_repo.save(count);
-		B_ERepository.save(temp2);
+		b_e_repo.save(temp2);
  */
 		//Test test1 = new Test();
 		//test1.nonstatictest();
@@ -73,6 +75,7 @@ public class Main implements CommandLineRunner {
 			database1.update_reg();
 			if (check_call[5]){
 				database1 = new DB();
+				b_e_repo.deleteAll();
 			}
 			if (check_call[6]){
 				close_validation = database1.close();

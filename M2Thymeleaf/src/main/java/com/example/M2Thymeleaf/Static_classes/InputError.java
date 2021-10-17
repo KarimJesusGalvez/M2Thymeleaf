@@ -13,6 +13,7 @@ public class InputError extends Exception{
             throw new InputMismatchException();
         }
         catch(InputMismatchException error){
+            error.printStackTrace();
             //pass
         }
     }

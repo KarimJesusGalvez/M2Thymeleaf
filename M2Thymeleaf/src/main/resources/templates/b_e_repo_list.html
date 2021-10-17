@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<h1>Bienvenid2</h1>
+<ul>
+
+    <li th:each="entry : ${registries}">
+        <span th:text="${entry.id}"></span>
+        <span th:text="${entry.model}"></span>
+        <span th:text="${entry.price}"></span>
+        <span th:text="${entry.ram}"></span>
+    </li>
+</ul>
+
+<p>
+    <b>ID</b>:
+    <span th:text="${registries[0].id}"></span>
+</p>
+<p>
+    <b>Model</b>:
+    <span th:text="${registries[0].model}"></span>
+</p>
+<p>
+    <b>RAM</b>:
+    <span th:text="${registries[0].ram}"></span>
+</p>
+<p>
+    <b>Price</b>:
+    <span th:text="${registries[0].price}"></span>
+</p>
+</body>
+</html>

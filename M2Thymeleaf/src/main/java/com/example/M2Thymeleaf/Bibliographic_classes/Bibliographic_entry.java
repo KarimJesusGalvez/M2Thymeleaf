@@ -9,7 +9,7 @@ import java.util.List;
 @Entity
 public class Bibliographic_entry {
 
-    @OneToMany
+    @OneToMany(fetch = FetchType.EAGER)
     private List<Author> authorsList= new ArrayList<>();
 
     @Id
@@ -94,12 +94,10 @@ public class Bibliographic_entry {
                 "; length='" + length + '\'' +
                 "; date_published='" + date_published + '\'';
 
-        for (int count = 0;count < authorsList.size();count++)
-            a.concat("; authors='" + authorsList.get(count).toString() + '\'');
+        for (int count = 0;count < this.authorsList.size();count++)
+            a.concat("; authors='" + this.authorsList.get(count).toString() + '\'');
 
-        return b.concat(a) +
-                '}';
-
+        return b.concat(a) + '}';
     }
 
     public void setType(String type) {
@@ -192,5 +190,9 @@ public class Bibliographic_entry {
 
     public List<Author> getSecondary_authorsList() {
         return authorsList;
+    }
+
+    public Long getTable_id() {
+        return table_id;
     }
 } // END class bibliographic entry

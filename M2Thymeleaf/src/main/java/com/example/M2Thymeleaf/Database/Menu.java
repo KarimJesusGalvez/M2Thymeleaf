@@ -4,6 +4,9 @@ import com.example.M2Thymeleaf.Bibliographic_classes.Bibliographic_entry;
 import com.example.M2Thymeleaf.Implementations.General_imp;
 import com.example.M2Thymeleaf.Static_classes.ManageDB;
 import com.example.M2Thymeleaf.Static_classes.Search_registry;
+import com.example.M2Thymeleaf.Static_classes.Test;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.GetMapping;
 
 import java.util.ArrayList;
@@ -14,7 +17,13 @@ import java.util.List;
  * UI == front end
  * A simple console Interfaces.input to select options
  */
+@Component
 public class Menu {
+
+    @Autowired
+    ManageDB manageDB;
+    @Autowired
+    Test test1;
 
     @GetMapping("Index.html")
     public String menuhtml() {
@@ -23,6 +32,12 @@ public class Menu {
 
     private List<Bibliographic_entry> registries = new ArrayList<Bibliographic_entry>();
 
+    public Menu() {
+    }
+
+    public Menu(ManageDB manageDB) {
+        this.manageDB = manageDB;
+    }
 
     /**
      * Constructor with 1 param
@@ -84,8 +99,10 @@ public class Menu {
 
         if (selection.equals("1" )
                 || selection.toUpperCase().charAt(0) == 'P'){
-            General_imp printreg = new General_imp();
-            printreg.print(registries);
+
+//          General_imp printreg = new General_imp();
+//          printreg.print(registries);
+            manageDB.print_repo();
             call_check[0] = true;
         }
         else if (selection.equals("2")
@@ -111,7 +128,7 @@ public class Menu {
         else if (selection.equals("3")
                 || selection.toUpperCase().charAt(0) == 'A'){
             try {
-                ManageDB manageDB = new ManageDB();
+//                ManageDB manageDB = new ManageDB();
                 this.registries.add(manageDB.add_registry());
                 call_check[2] = true;
             }
@@ -125,7 +142,7 @@ public class Menu {
         else if (selection.equals("4")
                 || selection.toUpperCase().charAt(0) == 'M'){
             try {
-                ManageDB manageDB = new ManageDB();
+//                ManageDB manageDB = new ManageDB();
                 this.registries = manageDB.change_registry(registries);
                 call_check[3] = true;
             }
@@ -139,8 +156,9 @@ public class Menu {
         else if (selection.equals("5")
                 || selection.toUpperCase().charAt(0) == 'E'){
             try {
-                ManageDB manageDB = new ManageDB();
+//                ManageDB manageDB = new ManageDB();
                 this.registries = manageDB.erase_registry(registries);
+
                 call_check[4] = true;
             }
             catch(Exception e){
@@ -163,7 +181,7 @@ public class Menu {
             catch(InterruptedException threadexception){
             }
             */
-            ManageDB manageDB = new ManageDB();
+//            ManageDB manageDB = new ManageDB();
             call_check[5] = manageDB.delete_all();
         }
         else if (selection.equals("7")
@@ -173,20 +191,19 @@ public class Menu {
         else if (selection.equals("-1")
                 || selection.toUpperCase().charAt(0) == 'T'){
             call_check[7] = true;
-            /*
-            Test test1 = new Test();
+
+            test1.nonstatictest();
+
             registries.add(test1.test_suite());
             for (int a = 0; a < 100; a++)
                 registries.add(test1.test_suite2());
-*/
         }
 
         else if (selection.equals("-99")) {
-          System.exit(-1);
+            System.out.println("Forcing closure...");
+            System.exit(-1);
         }
-        else if (selection.equals("548")){
-            this.registries.add(new Bibliographic_entry("test"));
-        }
+
         else { // TODO merge this with evaluate (interface?)
             try{
                 throw new IllegalAccessException();
@@ -201,9 +218,7 @@ public class Menu {
 
         }
         return call_check;
-
     }
-
 
     /**
      * Evaluates the option selected
