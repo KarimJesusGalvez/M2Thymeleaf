@@ -52,11 +52,8 @@ public class B_E_RESTController {
         b_e_repo.save(bibliographic_entry);
         return  bibliographic_entry; // To String in HTML ??
         // return "redirect: /rest/reg/all"
-        /*
 
-         */
     }
-
 
     @GetMapping("/rest/reg/all/string")
     public String[] findAllString(){
@@ -70,29 +67,45 @@ public class B_E_RESTController {
     public String findAll(){
 
         // TODO ERROR fix in JSON parsing
-        //return b_e_repo.findAll(); // To String en el HTML
+        //return b_e_repo.findAll();
+
         return  "["+b_e_repo.findById(1L).get().toJSON()+"]";
     }
 
 
     @GetMapping("/rest/reg/{id}")
     public Bibliographic_entry get_ById(@PathVariable Long id){
-
-        if (b_e_repo.getById(id).getTable_id() != null)
-            return b_e_repo.getById(id);
-        else
-            return b_e_repo.getById(1L);
-        // TODO FIX get_ById method
+    try {
+    if (b_e_repo.existsById(id))
+        return b_e_repo.findById(id).get();
+    else
+        throw new IllegalAccessException();
+    }catch(Exception error){
+    error.printStackTrace();
+    return b_e_repo.getById(1L);
     }
 
+        // TODO FIX get_ById method
+    }
+/*
     @PostMapping("/rest/reg/id")
     public Bibliographic_entry post_ById(@RequestBody Long id){
 
         // TODO check proper usage
-        Bibliographic_entry temp =b_e_repo.getById(id);
-        return temp;
-    }
 
+        try {
+            if (b_e_repo.existsById(id))
+                return b_e_repo.findById(id).get();
+            else
+                throw new IllegalAccessException();
+        }catch(Exception error){
+            error.printStackTrace();
+            return b_e_repo.getById(1L);
+        }
+
+
+    }
+*/
     @PutMapping("/rest/reg/mod")
     public Bibliographic_entry modify_ById(@RequestBody Bibliographic_entry bibliographic_entry){
         try {
