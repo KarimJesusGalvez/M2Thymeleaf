@@ -14,14 +14,12 @@ Pending Spring Injection !! Critical !!
 ***
 * PENDING JPA implementation
 
-* Recover data (findBy...)
 * Check/Add relations @ManyToOne....
 ***
 
 PENDING WEB/REST implementation
 
 * Ensure the local registries list updates when REST/MVC are used
-* Revert to String method to parse JSON in REST
 
 ***
 

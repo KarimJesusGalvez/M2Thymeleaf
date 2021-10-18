@@ -49,9 +49,10 @@ public class Main implements CommandLineRunner {
 
 		//dbRepository.save(database1);
 
-
+// Creating Testing entry
 		Author eug = new Author("Eugenia Perez");
 		author_repo.save(eug);
+
 
 		List<Author> sec_autors = new ArrayList<>();
 		Bibliographic_entry tempsave = new Bibliographic_entry(eug, sec_autors,null,"book","paperback",
