@@ -223,4 +223,36 @@ public class Bibliographic_entry {
     public Long getTable_id() {
         return table_id;
     }
+
+    public List<Author> getAuthorsList() {
+        return authorsList;
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public String getFormat() {
+        return format;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public String getLanguage() {
+        return language;
+    }
+
+    public String getGenre() {
+        return genre;
+    }
+
+    public String getLength() {
+        return length;
+    }
+
+    public String getDate_published() {
+        return date_published;
+    }
 } // END class bibliographic entry

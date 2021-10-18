@@ -66,7 +66,7 @@ public class B_E_RESTController {
     @GetMapping("/rest/reg/all")
     public String findAll(){
 
-        // TODO ERROR fix in JSON parsing
+
         //return b_e_repo.findAll();
 
         return  "["+b_e_repo.findById(1L).get().toJSON()+"]";

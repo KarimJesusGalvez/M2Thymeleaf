@@ -27,6 +27,10 @@ public class Author {
         return Author_id;
     }
 
+    public String getComplete_name() {return complete_name;}
+
+    public String getBirthyear() {return birthyear;}
+
     public void setComplete_name(String complete_name) {
         this.complete_name = complete_name;
     }
